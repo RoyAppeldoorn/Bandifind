@@ -5,6 +5,8 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
+
+    <div id="install-button">Install</div>
   </div>
 </template>
 
