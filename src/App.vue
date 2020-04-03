@@ -1,22 +1,24 @@
 <template>
   <v-app>
-    <TopNav class="hidden-sm-and-down" />
+    <v-container>
+      <TopNav />
 
-    <v-content
-      v-bind:class="{
-        'pa-0': $vuetify.breakpoint.smAndDown
-      }"
-    >
-      <router-view />
-    </v-content>
+      <v-content class="v-content--custom">
+        <router-view />
+      </v-content>
 
-    <BottomNav class="hidden-md-and-up" />
+      <BottomNav class="hidden-md-and-up" />
+    </v-container>
   </v-app>
 </template>
 
 <script>
 import BottomNav from "@/components/BottomNav.vue";
 import TopNav from "@/components/TopNav.vue";
+
+// v-bind:class="{
+//   'pa-0': $vuetify.breakpoint.smAndDown
+// }"
 
 export default {
   name: "App",
@@ -31,4 +33,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-content--custom {
+  transition: none !important;
+}
+</style>

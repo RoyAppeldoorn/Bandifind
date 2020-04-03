@@ -1,17 +1,33 @@
 <template>
   <div>
-    <v-app-bar color="rgb(255, 0, 0, 0)" flat light app>
-      <v-toolbar-title class="text--dark">Page title</v-toolbar-title>
+    <v-app-bar light app class="v-app-bar--custom">
+      <v-toolbar-title class="text--dark">{{
+        this.$route.meta.title
+      }}</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      <div class="hidden-sm-and-down">
+        <v-btn icon to="/home" exact>
+          <v-icon>mdi-home</v-icon>
+        </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+        <v-btn icon to="/bands" exact>
+          <v-icon>mdi-account-group</v-icon>
+        </v-btn>
+
+        <v-btn icon to="/search" exact>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+
+        <v-btn icon to="/artists" exact>
+          <v-icon>mdi-account-music</v-icon>
+        </v-btn>
+
+        <v-btn icon to="/profile" exact>
+          <v-icon>mdi-account</v-icon>
+        </v-btn>
+      </div>
     </v-app-bar>
   </div>
 </template>
@@ -20,4 +36,8 @@
 export default {};
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-app-bar--custom {
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1) !important;
+}
+</style>
