@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import BottomNav from "@/components/BottomNav.vue";
-import TopNav from "@/components/TopNav.vue";
+import BottomNav from "@/components/shared/BottomNav.vue";
+import TopNav from "@/components/shared/TopNav.vue";
 
 // v-bind:class="{
 //   'pa-0': $vuetify.breakpoint.smAndDown
