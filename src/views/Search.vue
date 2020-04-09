@@ -1,11 +1,46 @@
 <template>
-  <h1>This is Search</h1>
+  <div>
+    <BandCard v-for="item in items" :band="item" :key="item.index" />
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import BandCard from "@/components/band/BandCard.vue";
 
 export default {
-  name: "Search"
+  data() {
+    return {
+      items: [
+        {
+          color: "#1F7087",
+          image_src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg",
+          title: "Dikke",
+          artist: "Foster the People",
+          snippet_url: "audio.mp3"
+        },
+        {
+          color: "#1F7087",
+          image_src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg",
+          title: "Vette",
+          artist: "Foster the People",
+          snippet_url: "audio2.mp3"
+        },
+        {
+          color: "#1F7087",
+          image_src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg",
+          title: "Zeug",
+          artist: "Foster the People",
+          snippet_url: "audio2.mp3"
+        }
+      ]
+    };
+  },
+  components: {
+    BandCard
+  }
 };
 </script>
