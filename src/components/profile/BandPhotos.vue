@@ -6,7 +6,8 @@
       :src="item.src"
       reverse-transition="fade-transition"
       transition="fade-transition"
-    ></v-carousel-item>
+      >sdfsfdsfsdf</v-carousel-item
+    >
   </v-carousel>
 </template>
 
@@ -17,16 +18,21 @@ export default {
       items: [
         {
           src:
-            "https://images-mds.staticskynet.be/News/w-400_h-300_s-1/1865445_STEL1099_636652749088232298.jpg"
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg",
+          desc: "This is a photo of Johan at Graspop metal meeting"
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/sky.jpg"
+          src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg",
+          desc: "This is a photo of Johan and Kungen at Graspop metal meeting"
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/bird.jpg"
+          src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1101_636652749088232298.jpg"
         },
         {
-          src: "https://cdn.vuetifyjs.com/images/carousel/planet.jpg"
+          src:
+            "https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg"
         }
       ]
     };
