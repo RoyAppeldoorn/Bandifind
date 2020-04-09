@@ -1,23 +1,22 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-card max-width="450" class="mx-auto">
-      <v-subheader>Album history</v-subheader>
-      <template v-for="(item, index) in items">
-        <v-row v-bind:key="index">
-          <v-col sm="1"> </v-col>
-          <v-col sm="4">
-            <v-img height="100" width="100" :src="item.avatar"></v-img>
-          </v-col>
-          <v-col sm="7">
-            <v-text v-text="item.release"></v-text><br />
-            <v-text v-text="item.genre"></v-text><br />
-            <v-text v-text="item.label"></v-text><br />
-          </v-col>
-          <v-divider v-bind:key="index" />
-        </v-row>
-      </template>
-    </v-card>
-  </v-container>
+  <v-card max-width="450" class="mx-auto">
+    <v-subheader>Album history</v-subheader>
+    <template v-for="(item, index) in items">
+      <v-row v-bind:key="index">
+        <v-col sm="3">
+          <v-img height="100" width="100" :src="item.avatar"></v-img>
+        </v-col>
+        <v-col sm="9">
+          <v-text v-text="item.release"></v-text>
+          <br />
+          <v-text v-text="item.genre"></v-text>
+          <br />
+          <v-text v-text="item.label"></v-text>
+          <br />
+        </v-col>
+      </v-row>
+    </template>
+  </v-card>
 </template>
 
 <script>
@@ -30,7 +29,7 @@ export default {
         title: "Thoughts of no tomorrow",
         release: "Release year: 2005",
         genre: "Genre: Death metal",
-        label: "Label: Gain Music Entertainment"
+        label: "Label: Gain Music Entertainment",
       },
       {
         avatar:
@@ -38,7 +37,7 @@ export default {
         title: "Thoughts of no tomorrow",
         release: "Release year: 2005",
         genre: "Genre: Death metal",
-        label: "Label: Gain Music Entertainment"
+        label: "Label: Gain Music Entertainment",
       },
       {
         avatar:
@@ -46,7 +45,7 @@ export default {
         title: "Thoughts of no tomorrow",
         release: "Release year: 2005",
         genre: "Genre: Death metal",
-        label: "Label: Gain Music Entertainment"
+        label: "Label: Gain Music Entertainment",
       },
       {
         avatar:
@@ -54,15 +53,18 @@ export default {
         title: "Thoughts of no tomorrow",
         release: "Release year: 2005",
         genre: "Genre: Death metal",
-        label: "Label: Gain Music Entertainment"
-      }
-    ]
-  })
+        label: "Label: Gain Music Entertainment",
+      },
+    ],
+  }),
 };
 </script>
 
 <style lang="scss">
 .v-image--content {
   display: block;
+}
+.v-card {
+  padding: 5px;
 }
 </style>
