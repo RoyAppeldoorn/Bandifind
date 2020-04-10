@@ -4,6 +4,7 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import "./customInstallEvent";
 
 // eslint-disable-next-line no-unused-vars
 import "./notification";

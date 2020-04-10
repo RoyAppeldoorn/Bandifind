@@ -12,8 +12,10 @@
         prepend-inner-icon="mdi-magnify"
         label="Search"
       />
+
       <v-spacer></v-spacer>
 
+      <v-btn id="install-button" class="d-none">Install</v-btn>
       <div class="hidden-sm-and-down">
         <v-btn icon to="/home" exact>
           <v-icon>mdi-home</v-icon>
