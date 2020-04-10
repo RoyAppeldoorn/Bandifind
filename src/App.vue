@@ -34,6 +34,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/variables.scss";
+
+.v-application {
+  font-family: $body-font-family;
+  background: #222430;
+}
+
 .v-content--custom {
   transition: none !important;
 }
