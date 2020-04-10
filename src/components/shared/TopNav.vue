@@ -1,10 +1,17 @@
 <template>
   <div>
     <v-app-bar light app class="v-app-bar--custom">
-      <v-toolbar-title class="text--dark">{{
-        this.$route.meta.title
-      }}</v-toolbar-title>
-
+      <v-toolbar-title class="text--dark mr-10"
+        >{{ this.$route.meta.title }}
+      </v-toolbar-title>
+      <v-text-field
+        v-if="this.$route.meta.title === 'Search'"
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="Search"
+      />
       <v-spacer></v-spacer>
 
       <div class="hidden-sm-and-down">
