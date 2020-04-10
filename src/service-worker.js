@@ -7,7 +7,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 // eslint-disable-next-line no-undef
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-self.addEventListener("push", function(event) {
+self.addEventListener("push", function (event) {
   if (event.data) {
     var pushdata = JSON.parse(event.data.text());
     console.log("Service Worker: I received this:", pushdata);
@@ -28,25 +28,25 @@ self.addEventListener("push", function(event) {
 });
 
 // eslint-disable-next-line no-unused-vars
-let installPrompt;
+// let installPrompt;
 
-window.addEventListener("beforeinstallprompt", event => {
-  event.preventDefault();
-  installPrompt = event;
+// window.addEventListener("beforeinstallprompt", event => {
+//   event.preventDefault();
+//   installPrompt = event;
 
-  const installButton = document.getElementById("install-button");
-  installButton.style.display = "block";
+//   const installButton = document.getElementById("install-button");
+//   installButton.style.display = "block";
 
-  installButton.addEventListener("click", () => {
-    installPrompt.prompt();
+//   installButton.addEventListener("click", () => {
+//     installPrompt.prompt();
 
-    installButton.style.display = "none";
+//     installButton.style.display = "none";
 
-    installPrompt.userChoice.then(choiceResult => {
-      if (choiceResult.outcome !== "accepted") {
-        installButton.style.display = "block";
-      }
-      installPrompt = null;
-    });
-  });
-});
+//     installPrompt.userChoice.then(choiceResult => {
+//       if (choiceResult.outcome !== "accepted") {
+//         installButton.style.display = "block";
+//       }
+//       installPrompt = null;
+//     });
+//   });
+// });
