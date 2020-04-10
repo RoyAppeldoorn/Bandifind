@@ -8,15 +8,20 @@
     <v-window v-model="step">
       <v-window-item :value="1">
         <v-card-text>
-          <v-text-field label="Email" value="john@vuetifyjs.com"></v-text-field>
+          <v-text-field label="name" v-model="userprofile.personalbio.name"></v-text-field>
+          <v-text-field label="stage name" v-model="userprofile.personalbio.stagename"></v-text-field>
+          <v-text-field label="location" v-model="userprofile.personalbio.location"></v-text-field>
+          <v-text-field label="phone number" v-model="userprofile.personalbio.phonenumber"></v-text-field>
+          <v-text-field label="age" v-model="userprofile.personalbio.age"></v-text-field>
+          <v-text-field label="years of expierence" v-model="userprofile.personalbio.expierence"></v-text-field>
           <span class="caption grey--text text--darken-1">Personal info</span>
         </v-card-text>
       </v-window-item>
 
       <v-window-item :value="2">
-        <v-slide-group v-model="model" class="pa-4" multiple show-arrows>
+        <v-slide-group v-model="userprofile.selectedinstruments" class="pa-4" multiple show-arrows>
           <v-slide-item
-            v-for="item in items"
+            v-for="item in instrumentenum"
             :key="item.id"
             v-bind:value="item.desc"
             v-slot:default="{ active, toggle }"
@@ -40,31 +45,48 @@
       </v-window-item>
 
       <v-window-item :value="3">
-        <div class="pa-4 text-center">
-          <span>{{ model }}</span>
-          <span>{{ ReturnSelectedInstruments.desc }}</span>
-          <v-img class="mb-4" contain src="https://cdn.vuetifyjs.com/images/logos/v.svg"></v-img>
-
-          <h3 class="title font-weight-light mb-2">Welcome to Vuetify</h3>
-          <span class="caption grey--text">Genre</span>
-        </div>
+        <v-container fluid>
+          <v-combobox
+            v-model="userprofile.selectedgenres"
+            :items="items"
+            :search-input.sync="search"
+            hide-selected
+            label="Add some tags"
+            multiple
+            persistent-hint
+            small-chips
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <strong>{{ search }}</strong>". Press
+                    <kbd>enter</kbd> to create a new one
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-combobox>
+        </v-container>
       </v-window-item>
 
       <v-window-item :value="4">
-        <div class="pa-4 text-center">
-          <v-avatar class size="60" tile>
-            <v-img class="mb-4" src="https://cdn.vuetifyjs.com/images/logos/v.svg"></v-img>
-          </v-avatar>
-          <h3 class="title font-weight-light mb-2">Welcome to Vuetify</h3>
-          <span class="caption grey--text">Gear</span>
-        </div>
+        <v-card max-width="344" class="mx-auto">
+          <v-card-text>
+            Here you can add a picture of your gear and describe it with
+            text.
+          </v-card-text>
+          <v-textarea label="Gear description" v-model="userprofile.gear.desc"></v-textarea>
+        </v-card>
       </v-window-item>
 
       <v-window-item :value="5">
+        {{ userprofile.personalbio }}
+        {{ userprofile.gear }}
+        {{ userprofile.selectedgenres }}
+        {{ userprofile.selectedinstruments }}
         <div class="pa-4 text-center">
-          <v-img class="mb-4" contain height="128" src></v-img>
-          <h3 class="title font-weight-light mb-2">Welcome to Vuetify</h3>
-          <span class="caption grey--text">Thanks for signing up!</span>
+          <span class="caption grey--text">Your profile has been created!</span>
         </div>
       </v-window-item>
     </v-window>
@@ -81,8 +103,10 @@
 <script>
 export default {
   data: () => ({
+    items: ["Groove", "Power", "Heavy", "Black"],
+    search: null,
     step: 1,
-    items: [
+    instrumentenum: [
       {
         id: 0,
         src:
@@ -113,7 +137,20 @@ export default {
         desc: "vocalist"
       }
     ],
-    model: []
+
+    userprofile: {
+      personalbio: {
+        name: "",
+        stagename: "",
+        location: "",
+        phonenumber: "",
+        age: "",
+        expierence: ""
+      },
+      selectedinstruments: [],
+      selectedgenres: [],
+      gear: { desc: "" }
+    }
   }),
 
   computed: {
@@ -130,19 +167,6 @@ export default {
         default:
           return "Account created";
       }
-    },
-    returnSelectedInstruments() {
-      var instruments = [];
-      if (this.model.length) {
-        this.model.forEach(element => {
-          instruments.push(
-            this.items.filter(function(item) {
-              return item.id == element.id;
-            })
-          );
-        });
-      }
-      return instruments;
     }
   },
   methods: {}
