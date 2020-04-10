@@ -5,11 +5,11 @@ import Bands from "@/views/Bands";
 import Search from "@/views/Search";
 import Artists from "@/views/Artists";
 import Profile from "@/views/Profile";
+import ArtistRegistration from "@/views/ArtistRegistration";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/home",
     name: "Home",
     component: Home,
@@ -39,6 +39,14 @@ const routes = [
     component: Artists,
     meta: {
       title: "Artists"
+    }
+  },
+  {
+    path: "/artistregistration",
+    name: "ArtistRegistration",
+    component: ArtistRegistration,
+    meta: {
+      title: "ArtistRegistration"
     }
   },
   {

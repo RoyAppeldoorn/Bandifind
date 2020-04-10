@@ -1,20 +1,25 @@
 <template>
-  <v-carousel>
-    <v-carousel-item
-      v-for="(item, i) in items"
-      :key="i"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-      >sdfsfdsfsdf</v-carousel-item
-    >
-  </v-carousel>
+  <v-card>
+    <v-carousel v-model="currentIndex">
+      <v-carousel-item
+        v-for="(item, i) in items"
+        :key="i"
+        :src="item.src"
+        :v-model="i"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      ></v-carousel-item>
+    </v-carousel>
+
+    <v-card-subtitle>{{ currentTitle }}</v-card-subtitle>
+  </v-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      currentIndex: 0,
       items: [
         {
           src:
@@ -36,8 +41,17 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    currentTitle() {
+      return this.items[this.currentIndex].desc;
+    }
   }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-carousel {
+  height: 300px !important;
+}
+</style>
