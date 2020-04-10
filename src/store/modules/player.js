@@ -1,7 +1,8 @@
 export default {
   namespaced: true,
   state: {
-    isCurrentlyPlaying: false
+    isCurrentlyPlaying: false,
+    player: null
   },
   mutations: {
     START_PLAYER(state, payload) {
@@ -9,9 +10,17 @@ export default {
     },
     STOP_PLAYER(state, payload) {
       state.isCurrentlyPlaying = payload;
+    },
+    SET_PLAYER(state, payload) {
+      state.player = payload;
     }
   },
   actions: {
+    setPlayer({
+      commit
+    }, payload) {
+      commit("SET_PLAYER", payload);
+    },
     startPlaying({
       commit
     }) {

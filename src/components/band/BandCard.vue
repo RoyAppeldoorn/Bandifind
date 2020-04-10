@@ -20,6 +20,7 @@
               <div
                 :class="`pauseOverlay${isPlay ? ' active' : ''}`"
                 @click="stopAudio"
+                id="stopAudio"
               >
                 <v-btn icon color="transparant">
                   <v-icon class="stop" large>mdi-pause</v-icon>
@@ -40,41 +41,47 @@
 
 <script>
 import { Howl } from "howler";
-import { mapGetters } from "vuex";
-import { mapActions } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
   props: {
     band: Object
   },
   data: () => ({
-    sound: null,
     isPlay: false
   }),
   computed: {
+    ...mapState("player", ["player"]),
     ...mapGetters("player", ["isPlaying"])
   },
   methods: {
-    ...mapActions("player", ["startPlaying", "stopPlaying"]),
+    ...mapActions("player", ["startPlaying", "stopPlaying", "setPlayer"]),
     playAudio() {
       if (this.isPlaying) {
-        this.sound.stop();
-        this.stopPlaying();
+        this.stopAudio();
       }
 
-      this.sound = new Howl({
-        src: require("../../assets/" + this.band.snippet_url)
-      });
+      this.setPlayer(
+        new Howl({
+          src: require("../../assets/" + this.band.snippet_url)
+        })
+      );
 
-      this.sound.play();
-      this.isPlay = true;
-      this.startPlaying();
+      this.startAudio();
     },
     stopAudio() {
-      this.sound.stop();
+      this.player.stop();
       this.isPlay = false;
       this.stopPlaying();
+    },
+    startAudio() {
+      this.player.play();
+      this.startPlaying();
+      this.isPlay = true;
     }
+  },
+  beforeDestroy() {
+    this.stopAudio();
   }
 };
 </script>
