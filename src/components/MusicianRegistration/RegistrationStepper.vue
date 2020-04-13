@@ -8,12 +8,12 @@
     <v-window v-model="step">
       <v-window-item :value="1">
         <v-card-text>
-          <v-text-field label="name" v-model="userprofile.personalbio.name"></v-text-field>
-          <v-text-field label="stage name" v-model="userprofile.personalbio.stagename"></v-text-field>
-          <v-text-field label="location" v-model="userprofile.personalbio.location"></v-text-field>
-          <v-text-field label="phone number" v-model="userprofile.personalbio.phonenumber"></v-text-field>
-          <v-text-field label="age" v-model="userprofile.personalbio.age"></v-text-field>
-          <v-text-field label="years of expierence" v-model="userprofile.personalbio.expierence"></v-text-field>
+          <v-text-field label="name" v-model="userprofile.name"></v-text-field>
+          <v-text-field label="stage name" v-model="userprofile.stagename"></v-text-field>
+          <v-text-field label="location" v-model="userprofile.location"></v-text-field>
+          <v-text-field label="phone number" v-model="userprofile.phonenumber"></v-text-field>
+          <v-text-field label="age" v-model="userprofile.age"></v-text-field>
+          <v-text-field label="years of expierence" v-model="userprofile.expierence"></v-text-field>
           <span class="caption grey--text text--darken-1">Personal info</span>
         </v-card-text>
       </v-window-item>
@@ -72,16 +72,13 @@
 
       <v-window-item :value="4">
         <v-card max-width="344" class="mx-auto">
-          <v-card-text>
-            Here you can add a picture of your gear and describe it with
-            text.
-          </v-card-text>
+          <v-card-text>Here you can add a picture of your gear and describe it with text.</v-card-text>
           <v-textarea label="Gear description" v-model="userprofile.gear.desc"></v-textarea>
         </v-card>
       </v-window-item>
 
       <v-window-item :value="5">
-        {{ userprofile.personalbio }}
+        {{ userprofile }}
         {{ userprofile.gear }}
         {{ userprofile.selectedgenres }}
         {{ userprofile.selectedinstruments }}
@@ -139,14 +136,13 @@ export default {
     ],
 
     userprofile: {
-      personalbio: {
-        name: "",
-        stagename: "",
-        location: "",
-        phonenumber: "",
-        age: "",
-        expierence: ""
-      },
+      name: "",
+      stagename: "",
+      location: "",
+      phonenumber: "",
+      age: "",
+      expierence: "",
+
       selectedinstruments: [],
       selectedgenres: [],
       gear: { desc: "" }
