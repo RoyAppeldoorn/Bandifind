@@ -1,5 +1,10 @@
 <template>
-  <v-bottom-navigation grow color="teal" fixed>
+  <v-bottom-navigation
+    class="v-bottom-navigation--custom"
+    grow
+    color="#BB86FC"
+    fixed
+  >
     <v-btn style="height: auto" to="/home" exact>
       <span>Home</span>
       <v-icon>mdi-home</v-icon>
@@ -31,4 +36,8 @@
 export default {};
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.v-bottom-navigation--custom {
+  background-color: #191a1e;
+}
+</style>

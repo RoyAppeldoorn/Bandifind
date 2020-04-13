@@ -13,7 +13,6 @@ export default {
     return {
       items: [
         {
-          color: "#1F7087",
           image_src:
             "https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg",
           title: "Dikke",
@@ -21,7 +20,6 @@ export default {
           snippet_url: "audio.mp3"
         },
         {
-          color: "#1F7087",
           image_src:
             "https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg",
           title: "Vette",
@@ -29,7 +27,6 @@ export default {
           snippet_url: "audio2.mp3"
         },
         {
-          color: "#1F7087",
           image_src:
             "https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg",
           title: "Zeug",

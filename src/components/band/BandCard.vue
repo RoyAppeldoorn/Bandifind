@@ -2,7 +2,7 @@
   <v-container>
     <v-row dense>
       <v-col cols="12">
-        <v-card :color="band.color" dark>
+        <v-card color="#1E1E1E" dark>
           <div class="d-flex flex-no-wrap justify-start">
             <v-avatar class="ma-3 overlay" size="125" tile>
               <v-img :src="band.image_src"></v-img>
@@ -81,7 +81,9 @@ export default {
     }
   },
   beforeDestroy() {
-    this.stopAudio();
+    if (this.player) {
+      this.stopAudio();
+    }
   }
 };
 </script>
