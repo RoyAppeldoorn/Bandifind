@@ -30,7 +30,7 @@
             <div>
               <v-card-title class="headline" v-text="band.title"></v-card-title>
 
-              <v-card-subtitle v-text="band.artist"></v-card-subtitle>
+              <v-card-subtitle v-text="band.genres"></v-card-subtitle>
             </div>
           </div>
         </v-card>
