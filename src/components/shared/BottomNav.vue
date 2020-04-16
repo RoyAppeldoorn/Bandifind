@@ -38,6 +38,6 @@ export default {};
 
 <style lang="scss">
 .v-bottom-navigation--custom {
-  background-color: #191a1e;
+  background-color: #1f1f1f !important;
 }
 </style>

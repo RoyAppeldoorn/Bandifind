@@ -1,9 +1,10 @@
 <template>
   <div>
+    <v-container></v-container>
     <v-app-bar
       app
       class="v-app-bar--custom"
-      :color="this.$route.meta.title === 'Home' ? 'rgb(0, 0, 0, 0)' : '#191A1E'"
+      :color="this.$route.meta.title === 'Home' ? 'rgb(0, 0, 0, 0)' : '#1F1F1F'"
     >
       <v-btn icon>
         <svg
