@@ -3,7 +3,7 @@
     class="v-bottom-navigation--custom"
     grow
     color="#BB86FC"
-    fixed
+    app
   >
     <v-btn style="height: auto" to="/home" exact>
       <span>Home</span>
