@@ -45,7 +45,10 @@ import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   props: {
-    band: Object
+    band: {
+      type: Object,
+      required: true
+    }
   },
   data: () => ({
     isPlay: false
@@ -53,6 +56,11 @@ export default {
   computed: {
     ...mapState('player', ['player']),
     ...mapGetters('player', ['isPlaying'])
+  },
+  beforeDestroy() {
+    if (this.player) {
+      this.stopAudio()
+    }
   },
   methods: {
     ...mapActions('player', ['startPlaying', 'stopPlaying', 'setPlayer']),
@@ -78,11 +86,6 @@ export default {
       this.player.play()
       this.startPlaying()
       this.isPlay = true
-    }
-  },
-  beforeDestroy() {
-    if (this.player) {
-      this.stopAudio()
     }
   }
 }

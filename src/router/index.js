@@ -4,8 +4,10 @@ import Home from '@/views/Home'
 import Bands from '@/views/Bands'
 import Search from '@/views/Search'
 import Artists from '@/views/Artists'
-import Profile from '@/views/Profile'
+import BandProfile from '@/views/profile/BandProfile.vue'
 import ArtistRegistration from '@/views/ArtistRegistration'
+
+const Profile = () => import('@/views/profile/Profile.vue')
 
 Vue.use(VueRouter)
 
@@ -56,6 +58,14 @@ const routes = [
     component: Profile,
     meta: {
       title: 'Profile'
+    }
+  },
+  {
+    path: '/band',
+    name: 'BandProfile',
+    component: BandProfile,
+    meta: {
+      title: 'Band'
     }
   }
 ]
