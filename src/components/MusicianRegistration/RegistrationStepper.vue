@@ -13,23 +13,23 @@
     <v-window v-model="step">
       <v-window-item :value="1">
         <v-card-text>
-          <v-text-field label="name" v-model="userprofile.name"></v-text-field>
+          <v-text-field v-model="userprofile.name" label="name"></v-text-field>
           <v-text-field
-            label="stage name"
             v-model="userprofile.stagename"
+            label="stage name"
           ></v-text-field>
           <v-text-field
-            label="location"
             v-model="userprofile.location"
+            label="location"
           ></v-text-field>
           <v-text-field
-            label="phone number"
             v-model="userprofile.phonenumber"
+            label="phone number"
           ></v-text-field>
-          <v-text-field label="age" v-model="userprofile.age"></v-text-field>
+          <v-text-field v-model="userprofile.age" label="age"></v-text-field>
           <v-text-field
-            label="years of expierence"
             v-model="userprofile.expierence"
+            label="years of expierence"
           ></v-text-field>
           <span class="caption grey--text text--darken-1">Personal info</span>
         </v-card-text>
@@ -45,8 +45,8 @@
           <v-slide-item
             v-for="item in instrumentenum"
             :key="item.id"
-            v-bind:value="item.desc"
             v-slot:default="{ active, toggle }"
+            :value="item.desc"
           >
             <v-avatar class size="80" tile>
               <v-img :src="item.src" contain @click="toggle">
@@ -71,7 +71,8 @@
           <v-combobox
             v-model="userprofile.selectedgenres"
             :items="allgenres"
-            :item-value="allgenres.data.name"
+            item-text="name"
+            item-value="id"
             :search-input.sync="search"
             hide-selected
             label="Add some tags"
@@ -100,8 +101,8 @@
             text.</v-card-text
           >
           <v-textarea
-            label="Gear description"
             v-model="userprofile.gear.desc"
+            label="Gear description"
           ></v-textarea>
         </v-card>
       </v-window-item>
@@ -140,31 +141,31 @@ export default {
         id: 0,
         src:
           'https://www.muziekhandeljoosten.nl/3134-medium_default/esteve-1-cd-klassieke-gitaar.jpg',
-        desc: 'acoustic guitar',
+        desc: 'acoustic guitar'
       },
       {
         id: 1,
         src: 'https://images.static-thomann.de/pics/prod/406708.jpg',
-        desc: 'electric guitar',
+        desc: 'electric guitar'
       },
       {
         id: 2,
         src:
           'https://www.kirstein.de/out/pictures//master/product/1/6ce046a18784ee30d300535474013e91_1.jpg',
-        desc: 'drums',
+        desc: 'drums'
       },
       {
         id: 3,
         src:
           'https://www.muzikekipman.com/media/catalog/product/cache/1/image/512x512/9df78eab33525d08d6e5fb8d27136e95/4/4/44379d7d3c606e7086ce186ebf30589b.jpg',
-        desc: 'bass',
+        desc: 'bass'
       },
       {
         id: 4,
         src:
           'https://thumbs.static-thomann.de/thumb/thumb80x80/pics/bdb/163767/14567383_800.jpg',
-        desc: 'vocalist',
-      },
+        desc: 'vocalist'
+      }
     ],
 
     userprofile: {
@@ -176,8 +177,8 @@ export default {
       expierence: '',
       instruments: [{ name: '' }],
       genres: [{ name: '' }],
-      gear: { desc: '' },
-    },
+      gear: { desc: '' }
+    }
   }),
 
   computed: {
@@ -195,12 +196,12 @@ export default {
         default:
           return 'Account created'
       }
-    },
+    }
   },
-  methods: {},
-  mounted() {
+  created() {
     this.$store.dispatch('data/fetchGenres', null, { root: true })
   },
+  methods: {}
 }
 </script>
 

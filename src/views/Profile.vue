@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import Bio from "@/components/profile/Bio.vue";
-import AlbumHistory from "@/components/profile/AlbumHistory.vue";
-import BandPhotos from "@/components/profile/BandPhotos.vue";
-import AudioPlayer from "@/components/profile/AudioPlayer.vue";
+import Bio from '@/components/profile/Bio.vue'
+import AlbumHistory from '@/components/profile/AlbumHistory.vue'
+import BandPhotos from '@/components/profile/BandPhotos.vue'
+import AudioPlayer from '@/components/profile/AudioPlayer.vue'
 
 export default {
   components: {
@@ -28,7 +28,7 @@ export default {
     BandPhotos,
     AudioPlayer
   }
-};
+}
 </script>
 
 <style lang="scss" scoped></style>

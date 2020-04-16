@@ -6,35 +6,29 @@ export default {
   },
   mutations: {
     START_PLAYER(state, payload) {
-      state.isCurrentlyPlaying = payload;
+      state.isCurrentlyPlaying = payload
     },
     STOP_PLAYER(state, payload) {
-      state.isCurrentlyPlaying = payload;
+      state.isCurrentlyPlaying = payload
     },
     SET_PLAYER(state, payload) {
-      state.player = payload;
+      state.player = payload
     }
   },
   actions: {
-    setPlayer({
-      commit
-    }, payload) {
-      commit("SET_PLAYER", payload);
+    setPlayer({ commit }, payload) {
+      commit('SET_PLAYER', payload)
     },
-    startPlaying({
-      commit
-    }) {
-      commit("START_PLAYER", true);
+    startPlaying({ commit }) {
+      commit('START_PLAYER', true)
     },
-    stopPlaying({
-      commit
-    }) {
-      commit("STOP_PLAYER", false);
+    stopPlaying({ commit }) {
+      commit('STOP_PLAYER', false)
     }
   },
   getters: {
     isPlaying: state => {
-      return state.isCurrentlyPlaying;
+      return state.isCurrentlyPlaying
     }
   }
-};
+}

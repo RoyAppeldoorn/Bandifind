@@ -23,31 +23,31 @@ export default {
       items: [
         {
           src:
-            "https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg",
-          desc: "This is a photo of Johan at Graspop metal meeting"
+            'https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg',
+          desc: 'This is a photo of Johan at Graspop metal meeting'
         },
         {
           src:
-            "https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg",
-          desc: "This is a photo of Johan and Kungen at Graspop metal meeting"
+            'https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg',
+          desc: 'This is a photo of Johan and Kungen at Graspop metal meeting'
         },
         {
           src:
-            "https://images-mds.staticskynet.be/News/original/1865445_STEL1101_636652749088232298.jpg"
+            'https://images-mds.staticskynet.be/News/original/1865445_STEL1101_636652749088232298.jpg'
         },
         {
           src:
-            "https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg"
+            'https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg'
         }
       ]
-    };
+    }
   },
   computed: {
     currentTitle() {
-      return this.items[this.currentIndex].desc;
+      return this.items[this.currentIndex].desc
     }
   }
-};
+}
 </script>
 
 <style lang="scss">
