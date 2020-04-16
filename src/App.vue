@@ -13,28 +13,28 @@
 </template>
 
 <script>
-import BottomNav from "@/components/shared/BottomNav.vue";
-import TopNav from "@/components/shared/TopNav.vue";
+import BottomNav from '@/components/shared/BottomNav.vue'
+import TopNav from '@/components/shared/TopNav.vue'
 
 // v-bind:class="{
 //   'pa-0': $vuetify.breakpoint.smAndDown
 // }"
 
 export default {
-  name: "App",
-
-  data: () => ({
-    //
-  }),
+  name: 'App',
   components: {
     BottomNav,
     TopNav
-  }
-};
+  },
+
+  data: () => ({
+    //
+  })
+}
 </script>
 
 <style lang="scss">
-@import "@/styles/variables.scss";
+@import '@/styles/variables.scss';
 
 .v-application {
   font-family: $body-font-family;

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <div v-for="(item, index) in items" v-bind:key="index">
+    <div v-for="(item, index) in items" :key="index">
       <iframe
         :src="item.src"
         frameborder="0"
@@ -17,15 +17,15 @@ export default {
     return {
       items: [
         {
-          src: "https://www.youtube.com/embed/zfqdCXz8Yww",
+          src: 'https://www.youtube.com/embed/zfqdCXz8Yww'
         },
         {
-          src: "https://www.youtube.com/embed/zfqdCXz8Yww",
-        },
-      ],
-    };
-  },
-};
+          src: 'https://www.youtube.com/embed/zfqdCXz8Yww'
+        }
+      ]
+    }
+  }
+}
 </script>
 
 <style lang="scss">

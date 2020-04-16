@@ -1,73 +1,74 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "@/views/Home";
-import Bands from "@/views/Bands";
-import Search from "@/views/Search";
-import Artists from "@/views/Artists";
-import Profile from "@/views/Profile";
-import ArtistRegistration from "@/views/ArtistRegistration";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '@/views/Home'
+import Bands from '@/views/Bands'
+import Search from '@/views/Search'
+import Artists from '@/views/Artists'
+import Profile from '@/views/Profile'
+import ArtistRegistration from '@/views/ArtistRegistration'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const routes = [{
-    path: "/home",
-    name: "Home",
+const routes = [
+  {
+    path: '/home',
+    name: 'Home',
     component: Home,
     meta: {
-      title: "Home"
+      title: 'Home'
     }
   },
   {
-    path: "/bands",
-    name: "Bands",
+    path: '/bands',
+    name: 'Bands',
     component: Bands,
     meta: {
-      title: "Bands"
+      title: 'Bands'
     }
   },
   {
-    path: "/search",
-    name: "Search",
+    path: '/search',
+    name: 'Search',
     component: Search,
     meta: {
-      title: "Search"
+      title: 'Search'
     }
   },
   {
-    path: "/artists",
-    name: "Artists",
+    path: '/artists',
+    name: 'Artists',
     component: Artists,
     meta: {
-      title: "Artists"
+      title: 'Artists'
     }
   },
   {
-    path: "/artistregistration",
-    name: "ArtistRegistration",
+    path: '/artistregistration',
+    name: 'ArtistRegistration',
     component: ArtistRegistration,
     meta: {
-      title: "ArtistRegistration"
+      title: 'ArtistRegistration'
     }
   },
   {
-    path: "/profile",
-    name: "Profile",
+    path: '/profile',
+    name: 'Profile',
     component: Profile,
     meta: {
-      title: "Profile"
+      title: 'Profile'
     }
   }
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || "Bandifind";
-  next();
-});
+  document.title = to.meta.title || 'Bandifind'
+  next()
+})
 
-export default router;
+export default router

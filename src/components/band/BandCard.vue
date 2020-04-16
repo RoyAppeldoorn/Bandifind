@@ -18,9 +18,9 @@
               </div>
 
               <div
+                id="stopAudio"
                 :class="`pauseOverlay${isPlay ? ' active' : ''}`"
                 @click="stopAudio"
-                id="stopAudio"
               >
                 <v-btn icon color="transparant">
                   <v-icon class="stop" large>mdi-pause</v-icon>
@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import { Howl } from "howler";
-import { mapGetters, mapState, mapActions } from "vuex";
+import { Howl } from 'howler'
+import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -51,41 +51,41 @@ export default {
     isPlay: false
   }),
   computed: {
-    ...mapState("player", ["player"]),
-    ...mapGetters("player", ["isPlaying"])
+    ...mapState('player', ['player']),
+    ...mapGetters('player', ['isPlaying'])
   },
   methods: {
-    ...mapActions("player", ["startPlaying", "stopPlaying", "setPlayer"]),
+    ...mapActions('player', ['startPlaying', 'stopPlaying', 'setPlayer']),
     playAudio() {
       if (this.isPlaying) {
-        this.stopAudio();
+        this.stopAudio()
       }
 
       this.setPlayer(
         new Howl({
-          src: require("../../assets/" + this.band.snippet_url)
+          src: require('../../assets/' + this.band.snippet_url)
         })
-      );
+      )
 
-      this.startAudio();
+      this.startAudio()
     },
     stopAudio() {
-      this.player.stop();
-      this.isPlay = false;
-      this.stopPlaying();
+      this.player.stop()
+      this.isPlay = false
+      this.stopPlaying()
     },
     startAudio() {
-      this.player.play();
-      this.startPlaying();
-      this.isPlay = true;
+      this.player.play()
+      this.startPlaying()
+      this.isPlay = true
     }
   },
   beforeDestroy() {
     if (this.player) {
-      this.stopAudio();
+      this.stopAudio()
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -8,10 +8,10 @@
 
 <script>
 // @ is an alias to /src
-import RegistrationStepper from "@/components/MusicianRegistration/RegistrationStepper.vue";
+import RegistrationStepper from '@/components/MusicianRegistration/RegistrationStepper.vue'
 export default {
   components: {
     RegistrationStepper
   }
-};
+}
 </script>
