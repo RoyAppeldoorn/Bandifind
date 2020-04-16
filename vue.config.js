@@ -1,7 +1,4 @@
 module.exports = {
-  devServer: {
-    https: true
-  },
   publicPath: "/",
   pwa: {
     workboxPluginMode: "InjectManifest",

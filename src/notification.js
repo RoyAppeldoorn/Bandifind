@@ -2,16 +2,16 @@
 if (typeof Notification !== typeof undefined) {
   //First check if the API is available in the browser
   Notification.requestPermission()
-    .then(function(result) {
+    .then(function (result) {
       //If accepted, then save subscriberinfo in database
       if (result === "granted") {
         console.log(
           "Browser: User accepted receiving notifications, save as subscriber data!"
         );
-        navigator.serviceWorker.ready.then(function(serviceworker) {
+        navigator.serviceWorker.ready.then(function (serviceworker) {
           //When the Service Worker is ready, generate the subscription with our Serice Worker's pushManager and save it to our list
           const VAPIDPublicKey =
-            "BKT3bUIjKd5ERPyvGvel4SgdtR1MELATnG0f9KsJlzfA9SHPUT_-y2cT7fUinmsqs8-YpCS9jP3aPf_yflo7poc"; // Fill in your VAPID publicKey here
+            "BKT3bUIjKd5ERPyvGvel4SgdtR1MELATnG0f9KsJlzfA9SHPUT_-y2cT7fUinmsqs8-YpCS9jP3aPf_yflo7poc";
           const options = {
             applicationServerKey: VAPIDPublicKey,
             userVisibleOnly: true

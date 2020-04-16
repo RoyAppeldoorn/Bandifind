@@ -4,6 +4,9 @@
       <Bio />
     </v-col>
     <v-col sm="12" md="4">
+      <AudioPlayer />
+    </v-col>
+    <v-col sm="12" md="4">
       <BandPhotos />
     </v-col>
     <v-col sm="12" md="4">
@@ -16,12 +19,14 @@
 import Bio from "@/components/profile/Bio.vue";
 import AlbumHistory from "@/components/profile/AlbumHistory.vue";
 import BandPhotos from "@/components/profile/BandPhotos.vue";
+import AudioPlayer from "@/components/profile/AudioPlayer.vue";
 
 export default {
   components: {
     Bio,
     AlbumHistory,
-    BandPhotos
+    BandPhotos,
+    AudioPlayer
   }
 };
 </script>
