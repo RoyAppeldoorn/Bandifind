@@ -142,9 +142,8 @@ export default {
       phonenumber: "",
       age: "",
       expierence: "",
-
-      selectedinstruments: [],
-      selectedgenres: [],
+      instruments: [{ name: "" }],
+      genres: [{ name: "" }],
       gear: { desc: "" }
     }
   }),
