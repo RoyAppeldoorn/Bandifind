@@ -25,7 +25,7 @@
       <v-icon>mdi-account-music</v-icon>
     </v-btn>
 
-    <v-btn style="height: auto" to="/profile" exact>
+    <v-btn v-if="user !== null" style="height: auto" to="/profile" exact>
       <span>Profile</span>
       <v-icon>mdi-account</v-icon>
     </v-btn>
@@ -33,7 +33,13 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('userprofile', ['user'])
+  }
+}
 </script>
 
 <style lang="scss">

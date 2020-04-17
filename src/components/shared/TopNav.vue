@@ -58,7 +58,7 @@
       <v-btn id="install-button" class="d-none" tile outlined color="success"
         ><v-icon left>mdi-pencil</v-icon> Install</v-btn
       >
-      <div v-if="!loggedIn" class="my-2">
+      <div v-if="user == null" class="my-2">
         <v-btn text small color="#BB86FC" to="/artistregistration" exact
           >Register</v-btn
         >
@@ -80,7 +80,7 @@
           <v-icon>mdi-account-music</v-icon>
         </v-btn>
 
-        <v-btn icon to="/profile" exact>
+        <v-btn v-if="user !== null" icon to="/profile" exact>
           <v-icon>mdi-account</v-icon>
         </v-btn>
       </div>
@@ -89,12 +89,11 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('userprofile', ['loggedIn']),
-    ...mapState('userprofile', ['user'])
+    ...mapGetters('userprofile', ['user'])
   }
 }
 </script>
