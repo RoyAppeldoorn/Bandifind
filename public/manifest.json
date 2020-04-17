@@ -1,20 +1,20 @@
 {
-    "short_name": "Bandifind",
-    "name": "Bandifind",
-    "icons": [
-      {
-        "src": "img/icons/android-chrome-192x192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
-      {
-        "src": "img/icons/android-chrome-512x512.png",
-        "type": "image/png",
-        "sizes": "512x512"
-      }
-    ],
-    "start_url": ".",
-    "background_color": "#FFFFFF",
-    "display": "standalone",
-    "theme_color": "#FF7800"
-  }
+  "short_name": "Bandifind",
+  "name": "Bandifind",
+  "icons": [
+    {
+      "src": "img/icons/logo-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icons/logo-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#222430",
+  "display": "standalone",
+  "theme_color": "#BB86FC"
+}
