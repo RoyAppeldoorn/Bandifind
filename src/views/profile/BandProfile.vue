@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import Bio from '@/components/profile/Bio.vue'
-import AlbumHistory from '@/components/profile/AlbumHistory.vue'
-import BandPhotos from '@/components/profile/BandPhotos.vue'
-import AudioPlayer from '@/components/profile/AudioPlayer.vue'
+import Bio from '@/components/band/profile/Bio.vue'
+import AlbumHistory from '@/components/band/profile/AlbumHistory.vue'
+import BandPhotos from '@/components/band/profile/BandPhotos.vue'
+import AudioPlayer from '@/components/band/profile/AudioPlayer.vue'
 
 export default {
   components: {
