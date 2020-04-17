@@ -1,6 +1,7 @@
 import Axios from 'axios'
 
 export default {
+  namespaced: true,
   state: {
     user: null,
     loading: null,
@@ -9,6 +10,7 @@ export default {
   mutations: {
     SET_USER_DATA(state, payload) {
       state.user = payload
+      localStorage.setItem('user', JSON.stringify(payload))
     },
 
     SET_LOADING(state, payload) {
@@ -34,8 +36,9 @@ export default {
         })
     },
 
-    setHardcodedUser({ commit }, user) {
-      commit('SET_USER_DATA', user)
+    setHardcodedUser({ commit }, payload) {
+      console.log(payload)
+      commit('SET_USER_DATA', payload)
     },
 
     clearError({ commit }) {
@@ -53,6 +56,12 @@ export default {
 
     loggedIn: state => {
       return !!state.user
+    },
+
+    user: state => {
+      return state.user != null
+        ? state.user
+        : JSON.parse(localStorage.getItem('user'))
     }
   }
 }
