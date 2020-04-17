@@ -1,9 +1,11 @@
 <template>
-  <v-row sm="12" md="12">
-    <v-col sm="12" md="4">
-      <RegistrationStepper />
-    </v-col>
-  </v-row>
+  <v-container>
+    <v-row>
+      <v-col sm="12" class="py-0">
+        <RegistrationStepper />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

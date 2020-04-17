@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row align="center">
-      <v-col cols="12">
+      <v-col cols="12" class="pb-0">
         <v-autocomplete
           v-model="values"
           :items="fetchBandGenres"
@@ -15,7 +15,6 @@
         ></v-autocomplete>
       </v-col>
     </v-row>
-    {{ values }}
 
     <BandCard v-for="item in filteredList" :key="item.index" :band="item" />
   </div>
