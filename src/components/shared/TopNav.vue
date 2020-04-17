@@ -5,7 +5,7 @@
       class="v-app-bar--custom"
       :color="this.$route.meta.title === 'Home' ? 'rgb(0, 0, 0, 0)' : '#191A1E'"
     >
-      <v-btn icon>
+      <v-btn icon to="/home" exact>
         <svg
           width="22"
           height="25"
@@ -58,6 +58,11 @@
       <v-btn id="install-button" class="d-none" tile outlined color="success"
         ><v-icon left>mdi-pencil</v-icon> Install</v-btn
       >
+      <div v-if="!loggedIn" class="my-2">
+        <v-btn text small color="#BB86FC" to="/artistregistration" exact
+          >Register</v-btn
+        >
+      </div>
       <div class="hidden-sm-and-down">
         <v-btn icon to="/home" exact>
           <v-icon>mdi-home</v-icon>
@@ -84,7 +89,14 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters, mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('userprofile', ['loggedIn']),
+    ...mapState('userprofile', ['user'])
+  }
+}
 </script>
 
 <style lang="scss">
