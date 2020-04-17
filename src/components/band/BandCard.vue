@@ -2,9 +2,9 @@
   <v-container>
     <v-row dense>
       <v-col cols="12">
-        <v-card color="#1E1E1E" dark>
+        <v-card color="#1E1E1E" class="pa-0" dark>
           <div class="d-flex flex-no-wrap justify-start">
-            <v-avatar class="ma-3 overlay" size="125" tile>
+            <v-avatar class="overlay" size="125" tile>
               <v-img :src="band.image_src"></v-img>
               <div
                 :class="
@@ -27,10 +27,26 @@
                 </v-btn>
               </div>
             </v-avatar>
-            <div>
-              <v-card-title class="headline" v-text="band.title"></v-card-title>
-
-              <v-card-subtitle v-text="band.genres"></v-card-subtitle>
+            <div class="d-flex flex-column justify-space-between">
+              <v-card-title
+                class="headline pt-2"
+                v-text="band.title"
+              ></v-card-title>
+              <!-- <v-card-subtitle class="caption">
+                Looking for
+              </v-card-subtitle> -->
+              <v-card-text class="pb-2">
+                <v-chip
+                  v-for="genre in band.genres"
+                  :key="genre"
+                  x-small
+                  class="mr-2 mb-2"
+                  color="success"
+                  outlined
+                >
+                  {{ genre }}
+                </v-chip>
+              </v-card-text>
             </div>
           </div>
         </v-card>
