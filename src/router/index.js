@@ -46,10 +46,10 @@ const routes = [
   },
   {
     path: '/artistregistration',
-    name: 'ArtistRegistration',
+    name: 'Registration',
     component: ArtistRegistration,
     meta: {
-      title: 'ArtistRegistration'
+      title: 'Registration'
     }
   },
   {
@@ -77,7 +77,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user')
+
   document.title = to.meta.title || 'Bandifind'
+  if (to.name == 'Profile' && !loggedIn) next({ name: 'Registration' })
   next()
 })
 
