@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="!created" class="mx-auto" max-width="500">
+    <v-card v-if="!created">
       <v-card-title class="title font-weight-regular justify-space-between">
         <span>{{ currentTitle }}</span>
         <v-avatar
@@ -117,9 +117,7 @@
         <v-window-item :value="5">
           {{ musicianprofile }}
           <div class="pa-4 text-center">
-            <span class="caption grey--text"
-              >Your profile has been created!</span
-            >
+            <span class="caption grey--text">Hit the button!</span>
           </div>
         </v-window-item>
       </v-window>
@@ -136,10 +134,11 @@
           color="primary"
           depressed
           @click="createProfile"
-          >Go to profile</v-btn
+          >Finish</v-btn
         >
       </v-card-actions>
     </v-card>
+
     <v-container v-if="created">
       <v-row class="fill-height" align-content="center" justify="center">
         <v-col class="subtitle-1 text-center" cols="12">
@@ -194,7 +193,7 @@ export default {
         case 4:
           return 'Gear setup'
         default:
-          return 'Account created'
+          return 'Last check'
       }
     }
   },
