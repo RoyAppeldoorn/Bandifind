@@ -41,7 +41,7 @@
                   :key="genre"
                   x-small
                   class="mr-2 mb-2"
-                  color="success"
+                  color="#BB86FC"
                   outlined
                 >
                   {{ genre }}
