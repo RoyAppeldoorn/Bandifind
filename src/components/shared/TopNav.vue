@@ -55,8 +55,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn id="install-button" class="d-none" tile outlined color="success"
-        ><v-icon left>mdi-pencil</v-icon> Install</v-btn
+      <v-btn
+        id="install-button"
+        class="d-none"
+        tile
+        outlined
+        depressed
+        color="#BB86FC"
+      >
+        Install</v-btn
       >
       <div v-if="user == null" class="my-2">
         <v-btn text small color="#BB86FC" to="/artistregistration" exact
