@@ -3,9 +3,98 @@
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
-// eslint-disable-next-line no-undef
-workbox.precaching.precacheAndRoute(self.__precacheManifest)
+workbox.precaching.precacheAndRoute([])
+
+const cacheName = 'testCache'
+const offlineURL = '/offline.html'
+
+workbox.routing.registerRoute(
+  /\.(?:png|gif|jpg|jpeg|svg)$/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'images',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+      })
+    ]
+  })
+)
+
+// Cache Google fonts:
+workbox.routing.registerRoute(
+  new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'googleapis',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxEntries: 30,
+        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
+      })
+    ]
+  })
+)
+
+// This code listens for the user's confirmation to update the app.
+self.addEventListener('message', e => {
+  if (!e.data) {
+    return
+  }
+
+  switch (e.data) {
+    case 'skipWaiting':
+      self.skipWaiting()
+      break
+    default:
+      // NOOP
+      break
+  }
+})
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    (async () => {
+      const cache = await caches.open(cacheName)
+      await cache.add(new Request(offlineURL, { cache: 'reload' }))
+    })()
+  )
+})
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    (async () => {
+      if ('navigationPreload' in self.registration) {
+        await self.registration.navigationPreload.enable()
+      }
+    })()
+  )
+
+  self.clients.claim()
+})
+
+self.addEventListener('fetch', event => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      (async () => {
+        try {
+          const preloadResponse = await event.preloadResponse
+          if (preloadResponse) {
+            return preloadResponse
+          }
+
+          const networkResponse = await fetch(event.request)
+          return networkResponse
+        } catch (error) {
+          console.log('Fetch failed; returning offline page instead.', error)
+
+          const cache = await caches.open(cacheName)
+          const cachedResponse = await cache.match(offlineURL)
+          return cachedResponse
+        }
+      })()
+    )
+  }
+})
 
 self.addEventListener('push', function(event) {
   if (event.data) {
@@ -14,8 +103,8 @@ self.addEventListener('push', function(event) {
     if (pushdata['title'] != '' && pushdata['message'] != '') {
       const options = {
         body: pushdata['message'],
-        icon: 'img/apple-touch-icon-76x76.png',
-        vibrate: [300, 100, 400]
+        icon: 'img/icons/logo-512x512.png',
+        badge: 'img/icons/logo-192x192.png'
       }
       self.registration.showNotification(pushdata['title'], options)
       console.log('Service Worker: I made a notification for the user')
