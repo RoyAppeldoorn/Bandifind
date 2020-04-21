@@ -35,8 +35,8 @@
               label="age"
             ></v-text-field>
             <v-text-field
-              v-model="musicianprofile.expierence"
-              label="years of expierence"
+              v-model="musicianprofile.experience"
+              label="years of experience"
             ></v-text-field>
             <span class="caption grey--text text--darken-1">Personal info</span>
           </v-card-text>
@@ -115,7 +115,7 @@
         </v-window-item>
 
         <v-window-item :value="5">
-          {{ musicianprofile }}
+          <div class="subtitle-1">All done!</div>
           <div class="pa-4 text-center">
             <span class="caption grey--text">Hit the button!</span>
           </div>
@@ -172,13 +172,12 @@ export default {
       location: '',
       phonenumber: '',
       age: '',
-      expierence: '',
+      experience: '',
       instruments: [],
       genres: [],
       gear: []
     }
   }),
-
   computed: {
     ...mapState('data', ['allgenres']),
     ...mapState('data', ['allinstruments']),
@@ -201,6 +200,9 @@ export default {
     this.$store.dispatch('data/fetchGenres', null, { root: true }),
       this.$store.dispatch('data/fetchInstruments', null, { root: true })
   },
+  beforeDestroy() {
+    this.created = false
+  },
   methods: {
     createProfile() {
       this.created = true
@@ -209,7 +211,6 @@ export default {
 
       setTimeout(() => {
         this.$router.push({ name: 'Profile' })
-        this.created = false
       }, 3000)
     }
   }

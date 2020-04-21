@@ -1,26 +1,44 @@
 <template>
   <v-card>
     <v-card-text>
-      <div>Word of the Day</div>
-      <p class="display-1 text--primary">
-        be•nev•o•lent
+      <div class="text--primary">Stagename</div>
+      <p class="body-1">
+        {{ profile.stagename }}
       </p>
-      <p>adjective</p>
-      <div class="text--primary">
-        well meaning and kindly.<br />
-        "a benevolent smile"
-      </div>
+      <div class="text--primary">Age</div>
+      <p class="body-1">{{ profile.age }} years old</p>
+      <div class="text--primary">Location</div>
+      <p class="body-1">{{ profile.location }}</p>
+      <div class="text--primary">Years of experience</div>
+      <p class="body-1">{{ profile.experience }}</p>
+      <div class="text--primary">Genre</div>
+
+      <p v-if="profile.genre" class="mb-0">
+        <v-chip
+          v-for="genre in profile.genres"
+          :key="genre"
+          x-small
+          class="mr-2 mb-2"
+          color="#BB86FC"
+          outlined
+        >
+          {{ genre }}
+        </v-chip>
+      </p>
+      <p v-else class="mb-0">None</p>
     </v-card-text>
-    <v-card-actions>
-      <v-btn text color="deep-purple accent-4">
-        Learn More
-      </v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    profile: {
+      type: Object,
+      required: true
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
