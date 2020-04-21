@@ -46,14 +46,14 @@ export default {
             'https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg',
           title: 'Iron Maiden',
           genres: ['Rock', 'Metal', 'Hardrock'],
-          snippet_url: 'audio2.mp3'
+          snippet_url: 'audio.mp3'
         },
         {
           image_src:
             'https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg',
           title: 'Slayer',
           genres: ['Sludgemetal', 'Grindcore'],
-          snippet_url: 'audio2.mp3'
+          snippet_url: 'audio.mp3'
         }
       ],
       values: null

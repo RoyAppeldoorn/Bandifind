@@ -1,28 +1,61 @@
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [].concat(self.__precacheManifest || [])
-// eslint-disable-next-line no-undef
-workbox.precaching.precacheAndRoute(self.__precacheManifest)
+// The precaching code provided by Workbox.
+// self.__precacheManifest = [].concat(self.__precacheManifest || [])
+// workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
-self.addEventListener('push', function(event) {
-  if (event.data) {
-    var pushdata = JSON.parse(event.data.text())
-    console.log('Service Worker: I received this:', pushdata)
-    if (pushdata['title'] != '' && pushdata['message'] != '') {
-      const options = {
-        body: pushdata['message'],
-        icon: 'img/apple-touch-icon-76x76.png',
-        vibrate: [300, 100, 400]
-      }
-      self.registration.showNotification(pushdata['title'], options)
-      console.log('Service Worker: I made a notification for the user')
-    } else {
-      console.log(
-        "Service Worker: I didn't make a notification for the user, not all the info was there :("
-      )
-    }
+// Cache Google fonts
+workbox.routing.registerRoute(
+  /^https:\/\/fonts\.googleapis\.com/,
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'googleapis'
+  })
+)
+
+const CACHE_NAME = 'offline-html'
+
+const FALLBACK_HTML_URL = '/offline.html'
+// Populate the cache with the offline HTML page when the
+// service worker is installed.
+self.addEventListener('install', async event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.add(FALLBACK_HTML_URL))
+  )
+})
+
+this.addEventListener('fetch', event => {
+  // request.mode = navigate isn't supported in all browsers
+  // so include a check for Accept: text/html header.
+  if (
+    event.request.mode === 'navigate' ||
+    (event.request.method === 'GET' &&
+      event.request.headers.get('accept').includes('text/html'))
+  ) {
+    event.respondWith(
+      fetch(event.request.url).catch(error => {
+        // Return the offline page
+        return caches.match(FALLBACK_HTML_URL)
+      })
+    )
+  } else {
+    // Respond with everything else if we can
+    event.respondWith(
+      caches.match(event.request).then(function(response) {
+        return response || fetch(event.request)
+      })
+    )
+  }
+})
+
+self.addEventListener('message', e => {
+  if (!e.data) {
+    return
+  }
+
+  switch (e.data) {
+    case 'skipWaiting':
+      self.skipWaiting()
+      break
+    default:
+      // NOOP
+      break
   }
 })

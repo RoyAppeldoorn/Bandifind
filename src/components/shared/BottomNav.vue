@@ -5,7 +5,7 @@
     color="#BB86FC"
     app
   >
-    <v-btn style="height: auto" to="/home" exact>
+    <v-btn style="height: auto" to="/" exact>
       <span>Home</span>
       <v-icon>mdi-home</v-icon>
     </v-btn>

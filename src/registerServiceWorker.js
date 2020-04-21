@@ -2,10 +2,7 @@
 
 import { register } from 'register-service-worker'
 
-if (
-  process.env.NODE_ENV === 'production' ||
-  process.env.NODE_ENV === 'development'
-) {
+if (process.env.NODE_ENV === 'production') {
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {
       console.log(
@@ -13,8 +10,13 @@ if (
           'For more details, visit https://goo.gl/AFskqB'
       )
     },
-    registered() {
+    registered(registration) {
       console.log('Service worker has been registered.')
+
+      // Routinely check for app updates by testing for a new service worker.
+      setInterval(() => {
+        registration.update()
+      }, 1000 * 60 * 60) // hourly checks
     },
     cached() {
       console.log('Content has been cached for offline use.')
@@ -22,8 +24,14 @@ if (
     updatefound() {
       console.log('New content is downloading.')
     },
-    updated() {
+    updated(registration) {
       console.log('New content is available; please refresh.')
+
+      // Used to display of a 'refresh' banner following a service worker update.
+      // Set the event payload to the service worker registration object.
+      document.dispatchEvent(
+        new CustomEvent('swUpdated', { detail: registration })
+      )
     },
     offline() {
       console.log(

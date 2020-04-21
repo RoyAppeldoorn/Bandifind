@@ -4,7 +4,7 @@
       <v-img dark :src="require(`@/assets/bg.png`)" height="100vh" />
     </div>
 
-    <v-container>
+    <v-container class="pa-2">
       <v-row
         align="center"
         justify="center"
