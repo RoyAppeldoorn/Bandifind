@@ -23,6 +23,7 @@
 <script>
 // @ is an alias to /src
 import BandCard from '@/components/band/BandCard.vue'
+import { mapActions } from 'vuex'
 
 let filter = []
 
@@ -108,6 +109,9 @@ export default {
 
       return results
     }
+  },
+  created() {
+    this.$store.dispatch('bandprofile/fetchBands', null, { root: true })
   }
 }
 </script>
