@@ -1,41 +1,50 @@
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-workbox.precaching.precacheAndRoute([])
+// The precaching code provided by Workbox.
+// self.__precacheManifest = [].concat(self.__precacheManifest || [])
+// workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
-const cacheName = 'testCache'
-const offlineURL = '/offline.html'
-
+// Cache Google fonts
 workbox.routing.registerRoute(
-  /\.(?:png|gif|jpg|jpeg|svg)$/,
+  /^https:\/\/fonts\.googleapis\.com/,
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'images',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
-      })
-    ]
+    cacheName: 'googleapis'
   })
 )
 
-// Cache Google fonts:
-workbox.routing.registerRoute(
-  new RegExp('https://fonts.(?:googleapis|gstatic).com/(.*)'),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'googleapis',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 30,
-        maxAgeSeconds: 30 * 24 * 60 * 60 // 30 days
-      })
-    ]
-  })
-)
+const CACHE_NAME = 'offline-html'
 
-// This code listens for the user's confirmation to update the app.
+const FALLBACK_HTML_URL = '/offline.html'
+// Populate the cache with the offline HTML page when the
+// service worker is installed.
+self.addEventListener('install', async event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.add(FALLBACK_HTML_URL))
+  )
+})
+
+this.addEventListener('fetch', event => {
+  // request.mode = navigate isn't supported in all browsers
+  // so include a check for Accept: text/html header.
+  if (
+    event.request.mode === 'navigate' ||
+    (event.request.method === 'GET' &&
+      event.request.headers.get('accept').includes('text/html'))
+  ) {
+    event.respondWith(
+      fetch(event.request.url).catch(error => {
+        // Return the offline page
+        return caches.match(FALLBACK_HTML_URL)
+      })
+    )
+  } else {
+    // Respond with everything else if we can
+    event.respondWith(
+      caches.match(event.request).then(function(response) {
+        return response || fetch(event.request)
+      })
+    )
+  }
+})
+
 self.addEventListener('message', e => {
   if (!e.data) {
     return
@@ -48,70 +57,5 @@ self.addEventListener('message', e => {
     default:
       // NOOP
       break
-  }
-})
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    (async () => {
-      const cache = await caches.open(cacheName)
-      await cache.add(new Request(offlineURL, { cache: 'reload' }))
-    })()
-  )
-})
-
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    (async () => {
-      if ('navigationPreload' in self.registration) {
-        await self.registration.navigationPreload.enable()
-      }
-    })()
-  )
-
-  self.clients.claim()
-})
-
-self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      (async () => {
-        try {
-          const preloadResponse = await event.preloadResponse
-          if (preloadResponse) {
-            return preloadResponse
-          }
-
-          const networkResponse = await fetch(event.request)
-          return networkResponse
-        } catch (error) {
-          console.log('Fetch failed; returning offline page instead.', error)
-
-          const cache = await caches.open(cacheName)
-          const cachedResponse = await cache.match(offlineURL)
-          return cachedResponse
-        }
-      })()
-    )
-  }
-})
-
-self.addEventListener('push', function(event) {
-  if (event.data) {
-    var pushdata = JSON.parse(event.data.text())
-    console.log('Service Worker: I received this:', pushdata)
-    if (pushdata['title'] != '' && pushdata['message'] != '') {
-      const options = {
-        body: pushdata['message'],
-        icon: 'img/icons/logo-512x512.png',
-        badge: 'img/icons/logo-192x192.png'
-      }
-      self.registration.showNotification(pushdata['title'], options)
-      console.log('Service Worker: I made a notification for the user')
-    } else {
-      console.log(
-        "Service Worker: I didn't make a notification for the user, not all the info was there :("
-      )
-    }
   }
 })
