@@ -5,7 +5,7 @@
       class="v-app-bar--custom"
       :color="this.$route.meta.title === 'Home' ? 'rgb(0, 0, 0, 0)' : '#191A1E'"
     >
-      <v-btn icon to="/home" exact>
+      <v-btn icon disabled>
         <svg
           width="22"
           height="25"
@@ -71,7 +71,7 @@
         >
       </div>
       <div class="hidden-sm-and-down">
-        <v-btn icon to="/home" exact>
+        <v-btn icon to="/" exact>
           <v-icon>mdi-home</v-icon>
         </v-btn>
 
