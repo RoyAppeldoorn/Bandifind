@@ -46,6 +46,7 @@ export default {
     timeout: 0
   }),
   created() {
+    this.$store.dispatch('bandprofile/fetchBands', null, { root: true })
     // Listen for swUpdated event and display refresh snackbar as required.
     document.addEventListener('swUpdated', this.showRefreshUI, { once: true })
     // Refresh all open app tabs when a new service worker is installed.
