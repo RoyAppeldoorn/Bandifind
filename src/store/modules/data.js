@@ -17,13 +17,11 @@ export default {
   actions: {
     fetchGenres({ commit }) {
       Axios.get('http://localhost:8081/genres').then(data => {
-        console.log(data)
         commit('LOAD_GENRES', data.data)
       })
     },
     fetchInstruments({ commit }) {
       Axios.get('http://localhost:8081/instruments').then(data => {
-        console.log(data)
         commit('LOAD_INSTRUMENTS', data.data)
       })
     }
