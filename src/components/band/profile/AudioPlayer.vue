@@ -1,8 +1,8 @@
 <template>
   <v-card>
-    <div v-for="(item, index) in items" :key="index">
+    <div v-for="video in item.videos" :key="video.id">
       <iframe
-        :src="item.src"
+        :src="video.src"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
@@ -13,16 +13,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      items: [
-        {
-          src: 'https://www.youtube.com/embed/zfqdCXz8Yww'
-        },
-        {
-          src: 'https://www.youtube.com/embed/zfqdCXz8Yww'
-        }
-      ]
+  props: {
+    item: {
+      type: Object,
+      required: true
     }
   }
 }

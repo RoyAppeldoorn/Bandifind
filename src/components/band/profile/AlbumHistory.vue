@@ -2,17 +2,22 @@
   <v-card max-width="450" class="mx-auto">
     <v-subheader>Album history</v-subheader>
     <v-card-subtitle class="pt-0">
-      <template v-for="(item, index) in items">
+      <template v-for="(album, index) in item.albums">
         <v-row :key="index">
           <v-col sm="6">
             <v-avatar size="125" tile>
-              <v-img :src="item.avatar" />
+              <v-img :src="album.src" />
             </v-avatar>
           </v-col>
           <v-col sm="6">
-            <div v-text="item.release"></div>
-            <div v-text="item.genre"></div>
-            <div v-text="item.label"></div>
+            Release:
+            <div v-text="album.releaseyear"></div>
+            Genres:
+            <div v-for="genre in album.genres" :key="genre.id">
+              {{ genre.name }}
+            </div>
+            Label:
+            <div v-text="album.recordlabel"></div>
           </v-col>
         </v-row>
       </template>
@@ -22,6 +27,12 @@
 
 <script>
 export default {
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     items: [
       {

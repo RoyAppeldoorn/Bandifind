@@ -1,29 +1,39 @@
 <template>
   <div>
-    <v-row align="center">
-      <v-col cols="12" class="pb-0">
-        <v-autocomplete
-          v-model="values"
-          :items="fetchBandGenres"
-          outlined
-          dense
-          chips
-          small-chips
-          label="Search for genre"
-          multiple
-          color="#BB86FC"
-        ></v-autocomplete>
-      </v-col>
-    </v-row>
+    <div v-if="loading">
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="purple"
+        indeterminate
+      ></v-progress-circular>
+    </div>
+    <div v-if="!loading">
+      <v-row align="center">
+        <v-col cols="12" class="pb-0">
+          <v-autocomplete
+            v-model="values"
+            :items="fetchBandGenres"
+            outlined
+            dense
+            chips
+            small-chips
+            label="Search for genre"
+            multiple
+            color="#BB86FC"
+          ></v-autocomplete>
+        </v-col>
+      </v-row>
 
-    <BandCard v-for="item in filteredList" :key="item.index" :band="item" />
+      <BandCard v-for="item in filteredList" :key="item.id" :band="item" />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import BandCard from '@/components/band/BandCard.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 let filter = []
 
@@ -33,38 +43,16 @@ export default {
   },
   data() {
     return {
-      items: [
-        {
-          image_src:
-            'https://images-mds.staticskynet.be/News/original/1865445_STEL1223_636652749088232298.jpg',
-          title: 'Metallica',
-          genres: ['Rock', 'Metal'],
-          snippet_url: 'audio.mp3'
-        },
-        {
-          image_src:
-            'https://images-mds.staticskynet.be/News/original/1865445_STEL1158_636652749088232298.jpg',
-          title: 'Iron Maiden',
-          genres: ['Rock', 'Metal', 'Hardrock'],
-          snippet_url: 'audio.mp3'
-        },
-        {
-          image_src:
-            'https://images-mds.staticskynet.be/News/original/1865445_STEL1267_636652749088232298.jpg',
-          title: 'Slayer',
-          genres: ['Sludgemetal', 'Grindcore'],
-          snippet_url: 'audio.mp3'
-        }
-      ],
       values: null
     }
   },
   computed: {
+    ...mapState('bandprofile', ['bands', 'loading']),
     fetchBandGenres() {
       const genreArray = []
-      this.items.forEach(band => {
+      this.bands.forEach(band => {
         band.genres.forEach(genre => {
-          genreArray.push(genre)
+          genreArray.push(genre.name)
         })
       })
       return genreArray
@@ -73,9 +61,9 @@ export default {
       let results = []
 
       if (this.values && this.values.length) {
-        this.items.forEach(item => {
+        this.bands.forEach(item => {
           item.genres.forEach(genre => {
-            if (this.values.includes(genre)) {
+            if (this.values.includes(genre.name)) {
               if (!results.includes(item)) {
                 results.push(item)
               }
@@ -83,35 +71,32 @@ export default {
           })
         })
       } else {
-        return this.items
+        return this.bands
       }
-      return results
-    },
-    filteredList2() {
-      let results = []
-
-      if (this.values && this.values.length) {
-        filter.forEach(item => {
-          item.genres.filter(genre => {
-            if (!results.includes(item)) {
-              if (this.values.includes(genre)) {
-                results.push(item)
-              } else {
-                results.splice(item, 1)
-              }
-            }
-          })
-        })
-      } else {
-        filter = this.items
-        return filter
-      }
-
       return results
     }
-  },
-  created() {
-    this.$store.dispatch('bandprofile/fetchBands', null, { root: true })
+    //   filteredList2() {
+    //     let results = []
+
+    //     if (this.values && this.values.length) {
+    //       filter.forEach(item => {
+    //         item.genres.filter(genre => {
+    //           if (!results.includes(item)) {
+    //             if (this.values.includes(genre)) {
+    //               results.push(item)
+    //             } else {
+    //               results.splice(item, 1)
+    //             }
+    //           }
+    //         })
+    //       })
+    //     } else {
+    //       filter = this.items
+    //       return filter
+    //     }
+
+    //     return results
+    //   }
   }
 }
 </script>

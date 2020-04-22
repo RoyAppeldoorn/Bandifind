@@ -1,17 +1,22 @@
 <template>
   <v-card>
-    <v-card-text>
-      <div class="text--primary mb-2">Instruments</div>
-      <p
-        v-for="instrument in profile.instruments"
-        :key="instrument"
-        class="body-1"
-      >
-        {{ instrument.name }}
-      </p>
-      <div class="text--primary">Gear</div>
-      <p class="caption">{{ profile.gear }}</p>
-    </v-card-text>
+    <v-list-item two-line>
+      <v-list-item-content>
+        <v-list-item-title>Instruments</v-list-item-title>
+        <v-list-item-subtitle
+          v-for="instrument in profile.instruments"
+          :key="instrument.id"
+          >{{ instrument.name }}</v-list-item-subtitle
+        >
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-list-item two-line>
+      <v-list-item-content>
+        <v-list-item-title>Gear</v-list-item-title>
+        <v-list-item-subtitle>{{ profile.gear }}</v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
   </v-card>
 </template>
 

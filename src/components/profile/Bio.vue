@@ -13,16 +13,16 @@
       <p class="body-1">{{ profile.experience }}</p>
       <div class="text--primary">Genre</div>
 
-      <p v-if="profile.genre" class="mb-0">
+      <p v-if="profile.genres" class="mb-0">
         <v-chip
           v-for="genre in profile.genres"
           :key="genre"
           x-small
-          class="mr-2 mb-2"
+          class="mr-2 mb-2 mt-2"
           color="#BB86FC"
           outlined
         >
-          {{ genre }}
+          {{ genre.name }}
         </v-chip>
       </p>
       <p v-else class="mb-0">None</p>

@@ -4,8 +4,8 @@
       <v-col cols="12">
         <v-card color="#1E1E1E" class="pa-0" dark>
           <div class="d-flex flex-no-wrap justify-start">
-            <v-avatar class="overlay" size="125" tile>
-              <v-img :src="band.image_src"></v-img>
+            <v-avatar class="overlay" size="150" tile>
+              <v-img :src="band.photos[0].src"></v-img>
               <div
                 :class="
                   `playOverlay${!isPlay ? ' active' : isPlay ? ' playing' : ''}`
@@ -30,22 +30,27 @@
             <div class="d-flex flex-column justify-space-between">
               <v-card-title
                 class="headline pt-2"
-                v-text="band.title"
+                v-text="band.name"
               ></v-card-title>
               <!-- <v-card-subtitle class="caption">
                 Looking for
               </v-card-subtitle> -->
-              <v-card-text class="pb-2">
+              <v-card-text class="pb-0">
                 <v-chip
                   v-for="genre in band.genres"
-                  :key="genre"
+                  :key="genre.id"
                   x-small
                   class="mr-2 mb-2"
                   color="#BB86FC"
                   outlined
                 >
-                  {{ genre }}
+                  {{ genre.name }}
                 </v-chip>
+              </v-card-text>
+              <v-card-text class="pb-2">
+                <v-btn small :to="{ name: 'band', params: { id: band.id } }"
+                  >View band page</v-btn
+                >
               </v-card-text>
             </div>
           </div>
@@ -85,9 +90,11 @@ export default {
         this.stopAudio()
       }
 
+      this.band.snippet_url = require('../../assets/audio.mp3')
+
       this.setPlayer(
         new Howl({
-          src: require('../../assets/' + this.band.snippet_url)
+          src: this.band.snippet_url
         })
       )
 
