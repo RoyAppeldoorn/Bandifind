@@ -16,7 +16,7 @@
       <p v-if="profile.genres" class="mb-0">
         <v-chip
           v-for="genre in profile.genres"
-          :key="genre"
+          :key="genre.id"
           x-small
           class="mr-2 mb-2 mt-2"
           color="#BB86FC"
