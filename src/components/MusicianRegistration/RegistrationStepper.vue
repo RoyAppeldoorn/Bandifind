@@ -51,11 +51,11 @@
           >
             <v-slide-item
               v-for="item in allinstruments"
-              :key="item"
+              :key="item.id"
               v-slot:default="{ active, toggle }"
               :value="item"
             >
-              <v-avatar class size="80" tile>
+              <v-avatar class size="120" tile>
                 <v-img :src="item.src" contain @click="toggle">
                   <v-row class="fill-height" align="center" justify="center">
                     <v-scale-transition>
@@ -74,7 +74,7 @@
         </v-window-item>
 
         <v-window-item :value="3">
-          <v-container fluid>
+          <v-container>
             <v-combobox
               v-model="musicianprofile.genres"
               :items="allgenres"
@@ -102,23 +102,50 @@
         </v-window-item>
 
         <v-window-item :value="4">
-          <v-card max-width="344" class="mx-auto">
-            <v-card-text
-              >Here you can add a picture of your gear and describe it with
-              text.</v-card-text
-            >
+          <v-container>
+            <div>
+              Here you can add a picture of your gear and describe it with text.
+            </div>
             <v-textarea
               v-model="musicianprofile.gear"
               label="Gear description"
             ></v-textarea>
-          </v-card>
+          </v-container>
         </v-window-item>
 
         <v-window-item :value="5">
-          <div class="subtitle-1">All done!</div>
-          <div class="pa-4 text-center">
-            <span class="caption grey--text">Hit the button!</span>
-          </div>
+          <v-container>
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Instruments</v-list-item-title>
+                <v-list-item-subtitle
+                  v-for="item in musicianprofile.instruments"
+                  :key="item.id"
+                  >{{ item.name }}</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Genres</v-list-item-title>
+                <v-list-item-subtitle
+                  v-for="item in musicianprofile.genres"
+                  :key="item.id"
+                  >{{ item.name }}</v-list-item-subtitle
+                >
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item two-line>
+              <v-list-item-content>
+                <v-list-item-title>Gear</v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ musicianprofile.gear }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-container>
         </v-window-item>
       </v-window>
       <v-divider></v-divider>
@@ -134,7 +161,7 @@
           color="primary"
           depressed
           @click="createProfile"
-          >Finish</v-btn
+          >All set!</v-btn
         >
       </v-card-actions>
     </v-card>
