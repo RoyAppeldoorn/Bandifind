@@ -57,7 +57,7 @@
 
       <v-btn
         id="install-button"
-        class="d-none"
+        class="d-none mr-2"
         tile
         outlined
         depressed

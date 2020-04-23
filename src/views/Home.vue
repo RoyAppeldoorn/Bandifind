@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-background">
-      <v-img dark :src="require(`@/assets/bg.png`)" height="100vh" />
+      <v-img dark :src="`${publicPath}img/bg.png`" height="100vh" />
     </div>
 
     <v-container class="pa-2">
@@ -29,7 +29,12 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  data() {
+    return {
+      publicPath: process.env.BASE_URL
+    }
+  }
 }
 </script>
 

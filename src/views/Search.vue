@@ -1,12 +1,16 @@
 <template>
   <div>
     <div v-if="loading">
-      <v-progress-circular
-        :size="70"
-        :width="7"
-        color="purple"
-        indeterminate
-      ></v-progress-circular>
+      <v-container>
+        <v-row align="center" justify="center">
+          <v-progress-circular
+            :size="70"
+            :width="7"
+            color="purple"
+            indeterminate
+          ></v-progress-circular>
+        </v-row>
+      </v-container>
     </div>
     <div v-if="!loading">
       <v-row align="center">
@@ -75,28 +79,6 @@ export default {
       }
       return results
     }
-    //   filteredList2() {
-    //     let results = []
-
-    //     if (this.values && this.values.length) {
-    //       filter.forEach(item => {
-    //         item.genres.filter(genre => {
-    //           if (!results.includes(item)) {
-    //             if (this.values.includes(genre)) {
-    //               results.push(item)
-    //             } else {
-    //               results.splice(item, 1)
-    //             }
-    //           }
-    //         })
-    //       })
-    //     } else {
-    //       filter = this.items
-    //       return filter
-    //     }
-
-    //     return results
-    //   }
   }
 }
 </script>

@@ -1,7 +1,3 @@
-// The precaching code provided by Workbox.
-// self.__precacheManifest = [].concat(self.__precacheManifest || [])
-// workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
-
 // Cache Google fonts
 workbox.routing.registerRoute(
   /^https:\/\/fonts\.googleapis\.com/,
@@ -10,39 +6,63 @@ workbox.routing.registerRoute(
   })
 )
 
-const CACHE_NAME = 'offline-html'
+const cache = 'bandifind-cache'
+const offlineURL = '/offline.html'
+let defaultFiles = [
+  new Request(offlineURL, { cache: 'reload' }),
+  'img/bg.png',
+  'img/earth.png',
+  'favicon.ico'
+]
 
-const FALLBACK_HTML_URL = '/offline.html'
-// Populate the cache with the offline HTML page when the
-// service worker is installed.
-self.addEventListener('install', async event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.add(FALLBACK_HTML_URL))
+self.addEventListener('install', evt => {
+  console.log('Service Worker: Installing..')
+  evt.waitUntil(
+    caches.open(cache).then(cache => {
+      console.log('Service Worker: Caching static resources and offline page')
+      return cache.addAll(defaultFiles)
+    })
   )
 })
 
-this.addEventListener('fetch', event => {
-  // request.mode = navigate isn't supported in all browsers
-  // so include a check for Accept: text/html header.
-  if (
-    event.request.mode === 'navigate' ||
-    (event.request.method === 'GET' &&
-      event.request.headers.get('accept').includes('text/html'))
-  ) {
-    event.respondWith(
-      fetch(event.request.url).catch(error => {
-        // Return the offline page
-        return caches.match(FALLBACK_HTML_URL)
-      })
-    )
-  } else {
-    // Respond with everything else if we can
-    event.respondWith(
-      caches.match(event.request).then(function(response) {
-        return response || fetch(event.request)
-      })
-    )
-  }
+self.addEventListener('activate', evt => {
+  console.log('Service Worker: activated')
+})
+
+self.addEventListener('fetch', fetching => {
+  fetching.respondWith(
+    caches.match(fetching.request.url).then(response => {
+      console.log('Service Worker: Fetching resource ' + fetching.request.url)
+      return (
+        response ||
+        fetch(fetching.request)
+          .then(response => {
+            return caches.open(cache).then(cache => {
+              console.log(
+                'Service Worker: Giving back from cache > ' +
+                  fetching.request.url
+              )
+              return response
+            })
+          })
+          .catch(function() {
+            console.log(
+              'Service Worker: No cache for > ' + fetching.request.url
+            )
+            if (
+              fetching.request.mode === 'navigate' ||
+              (fetching.request.method === 'GET' &&
+                fetching.request.headers.get('accept').includes('text/html'))
+            ) {
+              console.log(
+                'Service Worker: Serving offline page > ' + fetching.request.url
+              )
+              return caches.match('offline.html')
+            }
+          })
+      )
+    })
+  )
 })
 
 self.addEventListener('message', e => {
