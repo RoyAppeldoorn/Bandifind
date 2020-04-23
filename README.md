@@ -10,7 +10,7 @@ Bandifind is an app made in a span of 8 weeks. The idea of the app is to match b
 
 ### Offline page
 
-![Offline page](demo/snake_registration.gif)
+![Offline page](demo/bandifind_offline.gif)
 
 ### Service worker re-initialisation pop-up
 
